@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="./assets/css/reset.css" />
+	<link rel="stylesheet" href="https://unpkg.com/beerslider/dist/BeerSlider.css">
+	<link rel="stylesheet" href="./assets/css/style.css" />
+	<link rel="stylesheet" href="./assets/css/animation.css" />
+	<title>make AR</title>
+	<link rel="shortcut icon" href="./lib/thumbs/deepar.ico">
+</head>
+<body>
+	<div id="loader-js" class="loader">
+		<div class="loader__text">
+			<span>L</span>
+			<span>O</span>
+			<span>A</span>
+			<span>D</span>
+			<span>I</span>
+			<span>N</span>
+			<span>G</span>
+		</div>
+		<div class="loader__box">
+			<div class="loader_inner"></div>
+			<div class="loader_inner"></div>
+			<div class="loader_inner"></div>
+			<div class="loader_inner"></div>
+			<div class="loader_inner"></div>
+			<div class="loader_inner"></div>
+			<div class="loader_inner"></div>
+			<div class="loader_inner"></div>
+			<div class="loader_inner"></div>
+			<div class="loader_inner"></div>
+			<div class="loader_inner"></div>
+			<div class="loader_inner"></div>
+		</div>
+	</div>
+	<div id="wrap-baseColor">
+		<div>
+			<p>これは、私が私のために開発した、パーソナルカラー診断ツールです。<br>XRによるメイク体験のステップを踏むことで、お気に入りのパーソナルカラーと顔タイプが見つかるでしょう。<br>それでは楽しんでください！<br><br>※スマホ非推奨<br><br><span class="font-pink">ベースカラーを選択してください</span></p>
+			<button id="btn-baseB" class="btnBase">ブルベ</button>
+			<button id="btn-baseY" class="btnBase">イエベ</button>
+		</div>
+	</div>
+	<div id="wrap-season">
+		<div>
+			<p><span class="font-pink">ベースカラーの中から、1番似合うシーズンを見つけましょう！</span><br>それぞれ４シーズンのリップカラーを試し、お気に入りが決まったら<br>OKボタンを押してください。</p>
+			<button id="btn-closeSeason" class="buttonHover-animation">close</button>
+		</div>
+	</div>
+	<div id="wrap-personalColor">
+		<div>
+			<p>あなたのパーソナルカラーは</p>
+			<p id="showPersonalColor" class="font-pink"></p>
+			<p>こちらの色味を使った、顔タイプごとのメイク体験を用意しました。それぞれ試し、お気に入りを見つけましょう。<br>保存ボタンでメイクのキープが可能です</p>
+			<button id="btn-closePersonal" class="buttonHover-animation">close</button>
+		</div>
+	</div>
+
+	<div class="main">
+		<div id="balloon-1" class="balloon-left">
+			<button id="btn-backToBase">back</button>
+			<button id="btn-backToSeaon">back</button>
+		</div>
+		<div class="wrap-tag-base">
+			<p id="tagBase"></p>
+		</div>
+		<div id="wrap-faceType">
+			<div id="btn-faceType">
+				<ul>
+					<li class="flex">
+						<button id="elegant" class="btn-effect">エレガント</button>
+						<button class="btn-save">保存</button>
+					</li>
+					<li class="flex">
+						<button id="fresh" class="btn-effect">フレッシュ</button>
+						<button class="btn-save">保存</button>
+					</li>
+					<li class="flex">
+						<button id="cool" class="btn-effect">クール</button>
+						<button class="btn-save">保存</button>
+					</li>
+					<li class="flex">
+						<button id="cute" class="btn-effect">キュート</button>
+						<button class="btn-save">保存</button>
+					</li>
+				</ul>
+			</div>
+			<div class="makeup-guide">
+				<div></div>
+			</div>
+			<div id="balloon" class="balloon">メイクポイントを見る<button id="btn-point">next</button></div>
+		</div>
+		<div id="cvsWrap">
+			<canvas class="deepar" id="deepar-canvas" oncontextmenu="event.preventDefault()"></canvas>
+		</div>
+
+		<div id="wrap-acc" class="acc">
+			<div class="acc-inner">
+				<div class="acc-ttl js-acc-ttl"></div>
+				<div class="acc-body">
+					<ul class="flex">
+						<li>
+							<p class="seasonTxt"></p>
+							<div class="circle"></div>
+						</li>
+						<li>
+							<p class="seasonTxt"></p>
+							<div class="circle"></div>
+						</li>
+						<li>
+							<p class="seasonTxt"></p>
+							<div class="circle"></div>
+						</li>
+						<li>
+							<p class="seasonTxt"></p>
+							<div class="circle"></div>
+						</li>
+					</ul>
+
+					<button id="rsltSeason">OK</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="wrap-thumb">
+			<div class="hukidashi">クリックで比較します<i data-feather="corner-down-right"></i></div>
+			<div>
+				<ul id="list-thumb" class="flex">
+					<li id="thumb01" class="thumbWrap">
+						<p>エレガント</p>
+						<img src="" id="thumbImg01" class="thumb" alt="">
+					</li>
+					<li id="thumb02" class="thumbWrap">
+						<p>フレッシュ</p>
+						<img src="" id="thumbImg02" class="thumb" alt="">
+					</li>
+					<li id="thumb03" class="thumbWrap">
+						<p>クール</p>
+						<img src="" id="thumbImg03" class="thumb" alt="">
+					</li>
+					<li id="thumb04" class="thumbWrap">
+						<p>キュート</p>
+						<img src="" id="thumbImg04" class="thumb" alt="">
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="wrap-points">
+			<div>
+				<table>
+					<thead>
+						<tr>
+							<th colspan="5">
+								<p id="pointName" class="font-pink"></p>
+								<p>さんにオススメのコスメ＆ポイント</p>
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="tableTtl">
+							<td colspan="5">顔タイプ</td>
+						</tr>
+						<tr class="tableTxt">
+							<td>エレガント</td>
+							<td>フレッシュ</td>
+							<td>キュート</td>
+							<td>クール</td>
+						</tr>
+						<tr class="tableTtl">
+							<td colspan="5">AR結果</td>
+						</tr>
+						<tr class="tableTxt">
+							<td>
+								<img id="pointEl" src="" alt="">
+							</td>
+							<td>
+								<img id="pointFr" src="" alt="">
+							</td>
+							<td>
+								<img id="pointCu" src="" alt="">
+							</td>
+							<td>
+								<img id="pointCo" src="" alt="">
+							</td>
+						</tr>
+						<tr class="tableTtl">
+							<td colspan="5">特徴</td>
+						</tr>
+						<tr class="tableTxt">
+							<td>やさしい<br>大人っぽい<br>ミックス<br>マット</td>
+							<td>活発<br>若々しい<br>直線的<br>一部ツヤ</td>
+							<td>かわいい<br>若々しい<br>曲線的<br>ツヤ</td>
+							<td>かっこいい<br>大人っぽい<br>直線的<br>マット</td>
+						</tr>
+						<tr class="tableTtl">
+							<td colspan="5">オススメのコスメ</td>
+						</tr>
+						<tr class="tableTxt">
+							<td>アイブロウ：<br>アイシャドウ：<br></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+				<button id="btn-backToFacetype">back</button>
+			</div>
+		</div>
+
+		<div class="modal">
+			<div class="modal-overlay"></div>
+			<div class="modal-container">
+				<div class="modal-top">
+					<button id="btn-modalClose">&times;</button>
+					<p id="modal-text">矢印をスライドさせてください</p>
+				</div>
+				<div class="modal-box">
+					<div id="beer-area">
+						<div id="beer-slider" class="beer-slider" data-beer-label="before">
+							<img id="beforeImg" src="https://placehold.jp/413x330.png" alt="before">
+							<div class="beer-reveal" data-beer-label="after">
+								<img id="afterImg" src="https://placehold.jp/413x330.png" alt="after">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="lib/deepar.js"></script>
+	<script src="https://unpkg.com/beerslider/dist/BeerSlider.js"></script>
+	<script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+	<script src="https://unpkg.com/feather-icons"></script>
+	<script type="text/javascript" src="./assets/js/data.js"></script>
+	<script type="text/javascript" src="./assets/js/script.js"></script>
+</body>
+</html>
+
+

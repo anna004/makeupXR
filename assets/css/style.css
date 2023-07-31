@@ -1,0 +1,506 @@
+@charset "utf-8";
+canvas.deepar {
+  border: 0px none;
+  background-color: black;
+  display: block;
+  margin: auto;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  position: relative;
+}
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Hiragino Kaku Gothic ProN", sans-serif, "ヒラギノ角ゴ ProN",
+    "Yu Gothic Medium", "游ゴシック Medium", "游ゴシック体", "メイリオ",
+    sans-serif;
+}
+
+button {
+  padding: 15px 20px;
+  color: #fff;
+  text-align: center;
+  border: solid 1px #fff;
+  border-radius: 5px;
+}
+p,
+div {
+  font-size: 14px;
+  line-height: 2;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.font-pink {
+  color: #ff99cc;
+}
+
+/* ====================
+ initial display: none;
+====================*/
+#btn-backToSeaon,
+#wrap-faceType,
+#wrap-season,
+#wrap-personalColor,
+#wrap-points,
+#wrap-thumb,
+#thumb01,
+#thumb02,
+#thumb03,
+#thumb04,
+.balloon,
+.modal-overlay,
+.modal-container {
+  display: none;
+}
+
+/* ====================
+ main
+====================*/
+.wrap-tag-base {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  padding: 12px 50px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+#wrap-baseColor,
+#wrap-faceType,
+#wrap-season,
+#wrap-personalColor,
+#wrap-points {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100vh;
+}
+.modal-overlay {
+  background: rgba(0, 0, 0, 0.8);
+}
+#wrap-season,
+#wrap-personalColor {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+#wrap-baseColor,
+#wrap-points {
+  background-color: #fff;
+}
+#wrap-baseColor {
+  display: block;
+}
+#wrap-faceType {
+  z-index: 1;
+}
+
+.btnBase {
+  width: 100%;
+  margin-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+#wrap-personalColor button,
+#wrap-season button {
+  width: 100%;
+  margin-top: 20px;
+}
+#wrap-baseColor > div,
+#wrap-personalColor > div,
+#wrap-season > div {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 50px;
+  text-align: center;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+@media screen and (max-width: 768px) {
+  #wrap-baseColor > div,
+  #wrap-personalColor > div,
+  #wrap-season > div {
+    width: 80%;
+    padding: 30px;
+  }
+}
+#wrap-baseColor > div {
+  background-color: inherit;
+}
+#wrap-baseColor > div > p {
+  margin-bottom: 80px;
+  color: #000;
+}
+#wrap-thumb {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.hukidashi {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  text-align: center;
+  transform: translateY(-50%);
+}
+.hukidashi svg {
+  display: block;
+  width: 18px;
+  margin-top: 5px;
+  margin-left: auto;
+}
+
+#wrap-thumb .flex {
+  width: 70%;
+  margin: auto;
+  justify-content: left;
+}
+#thumb01,
+#thumb02,
+#thumb03,
+#thumb04 {
+  width: 20%;
+  margin-left: 20px;
+  color: #fff;
+  text-align: center;
+}
+#thumb01 {
+  margin-left: 0px;
+}
+#wrap-thumb .flex li img {
+  margin-top: 10px;
+  border: solid 1px #fff;
+  border-radius: 5px;
+}
+#btn-faceType {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  padding: 15px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+#btn-faceType li {
+  margin-bottom: 10px;
+}
+#btn-faceType li:last-child {
+  margin-bottom: 0;
+}
+.btn-effect {
+  width: 130px;
+  margin-right: 10px;
+  font-size: 13px;
+}
+.btn-save {
+  font-size: 13px;
+}
+
+.makeup-guide {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.makeup-guide > div {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  height: 70%;
+  max-height: 820px;
+  border: dashed 2px #fff;
+  margin: auto;
+  opacity: 1;
+}
+.makeup-guide > div::before {
+  content: "顔を枠線に合わせてください";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -40px;
+  color: #fff;
+}
+@media screen and (max-width: 768px) {
+  .hukidashi {
+    color: #fff;
+    top: -10%;
+  }
+  .hukidashi svg {
+    display: none;
+  }
+  #wrap-thumb .flex {
+    width: 100%;
+  }
+  .makeup-guide > div {
+    opacity: 0;
+  }
+}
+
+.balloon {
+  position: absolute;
+  bottom: 300px;
+  right: 10px;
+  padding: 20px;
+  min-width: 120px;
+  max-width: 100%;
+  color: #fff;
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  line-height: 1.4;
+  border-radius: 5px;
+}
+.balloon:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -15px;
+  border: 15px solid transparent;
+  border-top: 15px solid rgba(0, 0, 0, 0.6);
+}
+.balloon button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 10px;
+}
+
+.balloon-left {
+  position: absolute;
+  top: 60px;
+  left: 9px;
+  z-index: 1;
+  width: 100px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 3px;
+  border-radius: 5px;
+  z-index: 2;
+}
+
+#btn-backToBase,
+#btn-backToSeaon {
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+#btn-backToBase,
+#btn-backToSeaon {
+  width: 100%;
+}
+#btn-backToFacetype {
+  position: fixed;
+  bottom: 100px;
+  left: 20px;
+  width: 100px;
+  color: #000;
+  border: solid 1px #000;
+}
+#btn-backToBase:before,
+#btn-backToSeaon:before,
+#btn-backToFacetype:before {
+  content: "←";
+  position: absolute;
+  left: 13px;
+}
+
+/* ====================
+ show personal color
+====================*/
+
+#showPersonalColor {
+  margin: 30px 0;
+}
+
+/* ====================
+ アコーディオン
+====================*/
+.acc {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 100%;
+}
+.acc-inner {
+  width: 100%;
+  margin: 0 auto;
+  padding: 30px 0;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.acc-ttl {
+  width: 0;
+  height: 0;
+  margin: auto;
+  border-style: solid;
+  border-width: 0 15px 26px 15px;
+  border-color: transparent transparent #fff transparent;
+  transition-duration: 0.3s;
+}
+.acc-ttl.is-active {
+  transform: rotate(180deg);
+}
+.acc-body {
+  width: fit-content;
+  height: 0;
+  margin: auto;
+  padding: 0 1.5em;
+  line-height: 0;
+  color: #fff;
+  overflow: scroll;
+  opacity: 0;
+  transition-duration: 0.5s;
+}
+.acc-body.is-open {
+  height: 300px;
+  padding: 30px;
+  opacity: 1;
+}
+.acc-spec {
+  width: fit-content;
+  margin: 100px auto 60px;
+}
+.circle {
+  width: 80px;
+  height: 80px;
+  margin: 10px;
+  border-radius: 100%;
+}
+.acc-body > .flex {
+  margin-bottom: 50px;
+}
+.acc-body button {
+  width: 100%;
+  padding: 25px;
+}
+.seasonTxt {
+  margin-bottom: 10px;
+  text-align: center;
+}
+@media screen and (max-width: 768px) {
+  .acc-body {
+    width: 100%;
+  }
+  .circle {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* モーダル */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+}
+.modal-overlay.active {
+  display: block;
+  z-index: 99;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  /* transition: .5s; */
+}
+.modal-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  padding: 10px 16px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.8);
+  transition: 0.5s;
+}
+.modal-container.active {
+  display: block;
+  max-width: 800px;
+  width: 80%;
+}
+.modal-top {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 10px;
+}
+.modal-top p {
+  font-size: 16px;
+}
+.modal-top button {
+  position: absolute;
+  right: 0;
+  font-size: 20px;
+  color: #000;
+  border: none;
+}
+/* ビフォーアフター */
+#beer-area {
+  margin: 0 auto;
+}
+#beforeImg {
+  height: 80%;
+  margin: 0 auto;
+}
+/* モーダルの中身canvas→imgに */
+.modal-picture {
+  margin: 0 auto;
+  max-width: 600px;
+  width: 100%;
+}
+#modal-phot {
+  width: 100%;
+}
+
+/* ====================
+ make points
+====================*/
+#wrap-points table {
+  width: 80%;
+  margin: 20px auto 0;
+}
+#wrap-points th {
+  width: 100%;
+  padding: 10px 10px 30px;
+  text-align: center;
+  font-weight: inherit;
+}
+#wrap-points td {
+  padding: 10px;
+  line-height: 1.6;
+  border: solid 1px #d3d3d3;
+}
+.tableTtl {
+  background-color: #d3d3d3;
+}
+.tableTxt {
+  display: flex;
+  width: 100%;
+  margin-bottom: 30px;
+}
+.tableTxt td {
+  display: block;
+  width: calc(100% / 4);
+}
